@@ -40,26 +40,26 @@ describe("FormSerializer", function() {
 
   it("should return correct tag name", function() {
     var input = new FormSerializer().getInputs(form);
-    expect(input).toEqual([ {
-      name: '002-1',
-      type: 'radio',
-      value: 'B'
-    }, {
-      name: '004-1',
-      type: 'radio',
-      value: 'X'
-    }, {
+    expect(input).toEqual([{
       name: '001-1',
       type: 'text',
-      value: ['统一建模语言']
+      answer: ['统一建模语言']
     }, {
       name: '001-2',
       type: 'text',
-      value: ['多态性', '继承性', '封装性']
-    },{
+      answer: ['多态性', '继承性', '封装性']
+    }, {
+      name: '002-1',
+      type: 'radio',
+      answer: ['B']
+    }, {
       name: '003-1',
       type: 'checkbox',
-      value: 'ABD'
+      answer: ['A','B','D']
+    }, {
+      name: '004-1',
+      type: 'radio',
+      answer: ['X']
     }]);
   });
 });

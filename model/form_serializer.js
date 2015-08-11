@@ -1,105 +1,39 @@
-// function FormSerializer() {
-// }
-// FormSerializer.prototype.getInputs = function(form){
-//   var inputs = form[0].getElementsByTagName('input');
-//   var result = [];
-//   var obj1 = [];
-//   var obj2 = [];
-//   var obj3 = [];
-//   for(var i = 0; i < inputs.length ; i++){
-//     // if(inputs[i].name === 'text'){
-//     //   obj.push(inputs[i]);
-//     // }
-//
-//   }
-//   result.forEach(function(val){
-//     obj.push({name:val.name,type:val.type,value:val.value});
-//   });
-//   return obj;
-// };
-
-
 function FormSerializer() {}
+
 FormSerializer.prototype.getInputs = function(form) {
-  var inputs = form[0].getElementsByTagName('input');
-  var text = [];
-  var radio = [];
-  var checkBox = [];
+  var inputs = form[0].getElementsByTagName('input'); //form[0] !!!
   var result = [];
-
-  //
-  // var getResult = function(input){
-  //   result.forEach(function(val){
-  //     if(val.name === input.name){
-  //
-  //     }
-  //   });
-  // }
-
+  var checkedInput = [];
   for (var i = 0; i < inputs.length; i++) {
-    if (inputs[i].type === 'text') {
-      text.push(inputs[i]);
-    }
-    if (inputs[i].type === 'radio') {
-      radio.push(inputs[i]);
-    }
-    if (inputs[i].type === 'checkbox') {
-      checkBox.push(inputs[i]);
+    if (inputs[i].type === 'text' || ((inputs[i].type === 'checkbox' || inputs[i].type === 'radio') && inputs[i].checked)) {
+      checkedInput.push(inputs[i]);
     }
   }
 
-
-
-  for (i = 0; i < radio.length; i++) {
-    if (radio[i].checked === true) {
-      result.push({
-        name: radio[i].name,
-        type: 'radio',
-        value: radio[i].value
-      });
-    }
-  }
-
-
-
-  for (i = 0; i < text.length; i++) {
-    if (text[i].value !== "") {
-      for (var k = 0; k < result.length; k++) {
-        if (result[k].name === text[i].name) {
-          result[k].value.push(text[i].value);
-          break;
-        } else if (k === result.length - 1) {
-          result.push({
-            name: text[i].name,
-            type: 'text',
-            value: [text[i].value]
-          });
-          break;
-        }
+  function getResult(val, result) {
+    for (var i = 0; i < result.length; i++) {
+      if (val.name === result[i].name) {
+        result[i].answer.push(val.value);
+        return;
       }
     }
+    result.push({
+      name: val.name,
+      type: val.type,
+      answer: [val.value]
+    });
+    return;
   }
-
-
-
-
-  for (i = 0; i < checkBox.length; i++) {
-    if (checkBox[i].checked === true) {
-      for (var loop = 0; loop < result.length; loop++) {
-        if (result[loop].name === checkBox[i].name) {
-          result[loop].value += checkBox[i].value;
-          break;
-        } else if (loop === result.length - 1) {
-          result.push({
-            name: checkBox[i].name,
-            type: 'checkbox',
-            value: checkBox[i].value
-          });
-          break;
-        }
-      }
-    }
-  }
-
+  checkedInput.forEach(function(val) {
+    getResult(val, result);
+  });
   return result;
+};
+
+FormSerializer.prototype.getTotal = function(result) {
+  var total = 0;
+  for (var i = 0; i < result.length; i++) {
+    total += new Question(result[i]).getScore();
+  }
+  return total;
 };

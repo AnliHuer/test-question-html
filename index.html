@@ -9,6 +9,8 @@
   <script type='text/javascript' src='bower_components/jasmine/lib/jasmine-core/jasmine.js'></script>
   <script type='text/javascript' src='bower_components/jasmine/lib/jasmine-core/jasmine-html.js'></script>
   <script type='text/javascript' src='bower_components/jasmine/lib/jasmine-core/boot.js'></script>
+
+
 </head>
 
 <body style='width:850px; margin-left:auto ;margin-right:auto'>
@@ -24,7 +26,7 @@
     考试科目:
     <input type='text' style='border:0px' value='&nbsp;&nbsp;&nbsp;统一建模语言' fontsize=50px value='readonly' readonly/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;时&nbsp;&nbsp;&nbsp;&nbsp;间：
     <input type='text' style='border:0px' value='&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;90分钟' value='readonly' readonly/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;得&nbsp;&nbsp;&nbsp;&nbsp;分：
-    <input type='text' style='border:none;border-bottom:1px solid #000;' />
+    <input type='text' style='border:none;border-bottom:1px solid #000;' id="score" />
     <p> 班&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;级：
       <input type='text' style='border:none;border-bottom:1px solid #000;' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 学&nbsp;&nbsp;&nbsp;&nbsp;号：
       <input type='text' style='border:none;border-bottom:1px solid #000;' id='num' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;姓&nbsp;&nbsp;&nbsp;&nbsp;名：
@@ -35,7 +37,7 @@
     <form class='content' method='post'>
       <h4>一 、 填空题</h4>
       <p>1. UML 的中文全称是:&nbsp;&nbsp;
-        <input   type='text' name='001-1' style='border:none;border-bottom:1px solid #000;' value="" />。
+        <input type='text' name='001-1' style='border:none;border-bottom:1px solid #000;' value="" />。
         <p> 2. 对象最突出的特征是:
           <input type='text' name='001-2' style='border:none;border-bottom:1px solid #000;' value="" />&nbsp;、
           <input type='text' name='001-2' style='border:none;border-bottom:1px solid #000;' value="" />&nbsp;、
@@ -46,7 +48,7 @@
       <p> 1.UML 与软件工程的关系是:【
         <label name='0021'></label>】
         <br>
-        <input type='radio' name='002-1' value='A' checked="true"/>UML 就是软件工程
+        <input type='radio' name='002-1' value='A'  />UML 就是软件工程
         <br>
         <input type='radio' name='002-1' value='B' />UML 参与到软件工程中软件开发过程的几个阶段
         <br>
@@ -106,11 +108,16 @@
         <br>
         <textarea rows='5' cols='40'></textarea>
       </p>
-      <input type='button' value='提交' name='submit' />
+      <input type='button' value='提交' id='submit' />
     </form>
   </div>
 </body>
-<script src='main.js'></script>
-<!-- <script src='form_serializer.js'></script>
-<script src='form_serializer_spec.js'></script> -->
+<script src="model/load_all_answer.js"></script>
+<script src='model/text.js'></script>
+<script src='model/select.js'></script>
+<script src='model/stregy_factory.js'></script>
+<script src='model/question.js'></script>
+<script src='model/form_serializer.js'></script>
+<script src='model/main.js'></script>
+
 </html>
